@@ -116,3 +116,100 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (nav) nav.style.background = window.scrollY > 50 ? 'rgba(6,5,15,.98)' : 'rgba(6,5,15,.94)';
 });
+
+/* ── MOCK AUTHENTICATION SYSTEM & PROFILE ROUTING ── */
+const authModal = document.getElementById('authModal');
+const closeAuth = document.getElementById('closeAuth');
+const authSubmit = document.getElementById('authSubmit');
+const authUsername = document.getElementById('authUsername');
+const navAuthBtn = document.getElementById('navAuthBtn'); // Target the specific ID if possible, or fallback
+const navLoginBtns = document.querySelectorAll('.nav-cta .px-btn-o');
+
+function updateNavState() {
+  const currentUser = localStorage.getItem('vdsa_user');
+  
+  navLoginBtns.forEach(btn => {
+    if (currentUser) {
+      btn.textContent = `[ ${currentUser} ]`;
+      btn.style.color = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      // When logged in, clicking the button takes you to the profile
+      btn.onclick = (e) => {
+        // Prevent default only if we are dynamically routing. 
+        // If your files are structured: /index.html and /pages/profile.html
+        // We will just set window.location
+        e.preventDefault();
+        const isInPagesFolder = window.location.pathname.includes('/pages/');
+        window.location.href = isInPagesFolder ? 'profile.html' : 'pages/profile.html';
+      };
+    } else {
+      btn.textContent = 'LOGIN / SIGNUP';
+      btn.style.color = ''; // reset
+      btn.style.borderColor = ''; // reset
+      // When logged out, clicking it opens the modal
+      btn.onclick = (e) => {
+        e.preventDefault();
+        if(authModal) authModal.classList.remove('hidden');
+      };
+    }
+  });
+}
+
+// Modal Event Listeners
+if (authModal) {
+  if(closeAuth) closeAuth.addEventListener('click', () => authModal.classList.add('hidden'));
+  
+  if(authSubmit) authSubmit.addEventListener('click', () => {
+    const userVal = authUsername.value.trim().toUpperCase();
+    if (userVal) {
+      localStorage.setItem('vdsa_user', userVal);
+      authModal.classList.add('hidden');
+      updateNavState();
+      for(let i=0; i<5; i++) document.body.click(); // spark effect
+    }
+  });
+
+  // Toggle tabs visually
+  const tabRegister = document.getElementById('tabRegister');
+  const tabLogin = document.getElementById('tabLogin');
+  if(tabRegister && tabLogin) {
+    tabRegister.addEventListener('click', (e) => {
+      e.target.classList.add('active');
+      tabLogin.classList.remove('active');
+      authSubmit.innerHTML = 'REGISTER ▶';
+    });
+    tabLogin.addEventListener('click', (e) => {
+      e.target.classList.add('active');
+      tabRegister.classList.remove('active');
+      authSubmit.innerHTML = 'INITIALIZE ▶';
+    });
+  }
+}
+
+// ── PROFILE PAGE SPECIFIC LOGIC ──
+const profileNameEl = document.getElementById('profileName');
+const logoutBtn = document.getElementById('logoutBtn');
+
+if (profileNameEl) {
+  // If we are on the profile page, populate the name
+  const currentUser = localStorage.getItem('vdsa_user');
+  if (currentUser) {
+    profileNameEl.textContent = currentUser;
+  } else {
+    // If somehow accessed without logging in, redirect to home
+    const isInPagesFolder = window.location.pathname.includes('/pages/');
+    window.location.href = isInPagesFolder ? '../index.html' : 'index.html';
+  }
+
+  // Handle Logout
+  if(logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('vdsa_user');
+      const isInPagesFolder = window.location.pathname.includes('/pages/');
+      window.location.href = isInPagesFolder ? '../index.html' : 'index.html';
+    });
+  }
+}
+
+// Run on page load
+updateNavState();

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>👤 Player Profile — VisualDSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/base.css"/>
+<link rel="stylesheet" href="../css/profile.css"/>
+</head>
+<body>
+<canvas id="bgC"></canvas>
+<div class="cur" id="cur">👤</div>
+<div class="cur-r" id="curR"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="../index.html">▶ VisualDSA</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">[HOME]</a></li>
+    <li><a href="battle.html" class="battle-link">[⚔ BATTLE]</a></li>
+    <li><a href="learn.html" class="learn-link">[📖 LEARN]</a></li>
+    <li><a href="#" class="rank-link">[RANKS]</a></li>
+    <li><a href="guild.html" class="guild-link">[🛡️ GUILD]</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="px-btn px-btn-o" id="navAuthBtn">LOGIN / SIGNUP</a>
+    <a href="battle.html" class="px-btn px-btn-g">⚔ FIND MATCH</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  
+  <div class="profile-layout">
+    
+    <div class="p-col-left">
+      <div class="id-card">
+        <div class="id-avatar">🤖</div>
+        <h1 class="id-name" id="profileName">GUEST_USER</h1>
+        <div class="id-title">ALGORITHM ENTHUSIAST</div>
+        <div class="id-tags">
+          <span class="chip chip-y">LEVEL 12</span>
+          <span class="chip chip-p">PYTHON</span>
+        </div>
+        
+        <div class="id-guild">
+          <div class="idg-lbl">FACTION</div>
+          <div class="idg-val">🛡️ THE_RUNTIME_TERRORS</div>
+        </div>
+
+        <button class="px-btn px-btn-r" id="logoutBtn" style="width:100%;justify-content:center;margin-top:20px;">LOGOUT [X]</button>
+      </div>
+    </div>
+
+    <div class="p-col-right">
+      
+      <div class="p-panel">
+        <div class="p-panel-head" style="color:var(--yellow);border-bottom-color:rgba(255,214,10,.3);">📊 COMBAT RECORD</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="sb-lbl">GLOBAL ELO</div>
+            <div class="sb-val" style="color:var(--yellow);">1,240</div>
+          </div>
+          <div class="stat-box">
+            <div class="sb-lbl">BATTLES PLAYED</div>
+            <div class="sb-val" style="color:var(--white);">142</div>
+          </div>
+          <div class="stat-box">
+            <div class="sb-lbl">BATTLES WON</div>
+            <div class="sb-val" style="color:var(--green);">89</div>
+          </div>
+          <div class="stat-box">
+            <div class="sb-lbl">WIN RATE</div>
+            <div class="sb-val" style="color:var(--blue);">62.6%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-panel">
+        <div class="p-panel-head" style="color:var(--green);border-bottom-color:rgba(61,255,154,.3);">⏱ RECENT BATTLES</div>
+        <div class="history-list">
+          
+          <div class="hist-row win">
+            <div class="hr-res">VICTORY</div>
+            <div class="hr-algo">BINARY SEARCH <span>vs CODEZ_GOD</span></div>
+            <div class="hr-time">0.8s</div>
+            <div class="hr-elo">+24 ELO</div>
+          </div>
+
+          <div class="hist-row loss">
+            <div class="hr-res">DEFEAT</div>
+            <div class="hr-algo">TWO POINTERS <span>vs NULL_POINTER</span></div>
+            <div class="hr-time">TIME UP</div>
+            <div class="hr-elo">-18 ELO</div>
+          </div>
+
+          <div class="hist-row win">
+            <div class="hr-res">VICTORY</div>
+            <div class="hr-algo">BUBBLE SORT <span>vs BRUTE_FORCER</span></div>
+            <div class="hr-time">1.2s</div>
+            <div class="hr-elo">+15 ELO</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="authModal" class="auth-modal-overlay hidden">
+  <div class="auth-modal">
+    <button class="close-btn" id="closeAuth">X</button>
+    <h2 style="color:var(--green);margin-bottom:16px;font-family:'Press Start 2P',monospace;font-size:12px;">▶ TERMINAL ACCESS</h2>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin">LOGIN</button>
+      <button class="auth-tab" id="tabRegister">SIGNUP</button>
+    </div>
+    <div class="auth-form">
+      <input type="text" id="authUsername" class="auth-input" placeholder="USERNAME" autocomplete="off" />
+      <input type="password" id="authPassword" class="auth-input" placeholder="PASSWORD" />
+      <button class="px-btn px-btn-g" id="authSubmit" style="width:100%;justify-content:center;margin-top:10px;">INITIALIZE ▶</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="../js/base.js"></script>
+<script src="js/base.js"></script>
+</body>
+</html>

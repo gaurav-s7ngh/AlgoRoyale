@@ -63,8 +63,7 @@
     <li><a href="pages/battle.html" class="battle-link">[⚔ BATTLE]</a></li>
     <li><a href="pages/learn.html" class="learn-link">[📖 LEARN]</a></li>
     <li><a href="#" class="rank-link">[RANKS]</a></li>
-    <li><a href="#" class="guild-link">[GUILD]</a></li>
-  </ul>
+<li><a href="pages/guild.html" class="guild-link">[🛡️ GUILD]</a></li>  </ul>
   <div class="nav-cta">
     <button class="px-btn px-btn-o">LOGIN</button>
     <a href="pages/battle.html" class="px-btn px-btn-g">START FREE ▶</a>
@@ -241,7 +240,21 @@
     </div>
   </div>
 </div>
-
+<div id="authModal" class="auth-modal-overlay hidden">
+  <div class="auth-modal">
+    <button class="close-btn" id="closeAuth">X</button>
+    <h2 style="color:var(--green);margin-bottom:16px;font-family:'Press Start 2P',monospace;font-size:12px;">▶ TERMINAL ACCESS</h2>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin">LOGIN</button>
+      <button class="auth-tab" id="tabRegister">SIGNUP</button>
+    </div>
+    <div class="auth-form">
+      <input type="text" id="authUsername" class="auth-input" placeholder="USERNAME" autocomplete="off" />
+      <input type="password" id="authPassword" class="auth-input" placeholder="PASSWORD" />
+      <button class="px-btn px-btn-g" id="authSubmit" style="width:100%;justify-content:center;margin-top:10px;">INITIALIZE ▶</button>
+    </div>
+  </div>
+</div>
 <footer>
   <div class="fl">▶ VISUALDSA</div>
   <div class="fli">
@@ -253,6 +266,7 @@
   </div>
   <div class="fc2">© 2025 VISUALDSA · MADE WITH 8BIT LOVE</div>
 </footer>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

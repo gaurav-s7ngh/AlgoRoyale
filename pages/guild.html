@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>🛡️ Guilds — VisualDSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/base.css"/>
+<link rel="stylesheet" href="../css/guild.css"/>
+</head>
+<body>
+<canvas id="bgC"></canvas>
+<div class="cur" id="cur">🛡️</div>
+<div class="cur-r" id="curR"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="../index.html">▶ VisualDSA</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">[HOME]</a></li>
+    <li><a href="battle.html" class="battle-link">[⚔ BATTLE]</a></li>
+    <li><a href="learn.html" class="learn-link">[📖 LEARN]</a></li>
+    <li><a href="#" class="rank-link">[RANKS]</a></li>
+    <li><a href="guild.html" class="active guild-link">[🛡️ GUILD]</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="px-btn px-btn-o">LOGIN</button>
+    <a href="battle.html" class="px-btn px-btn-r">⚔ GO BATTLE</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="chip chip-p">🛡️ GUILD HUB</div>
+      <h1 style="color:var(--purple);text-shadow:3px 3px 0 var(--pud);">COMMUNITIES & FACTIONS</h1>
+      <p>Join a guild, train together, and dominate the global leaderboards. Host private battles or wage war against rival factions.</p>
+    </div>
+    <div class="page-header-right">
+      <button class="px-btn px-btn-g">➕ CREATE GUILD</button>
+      <button class="px-btn px-btn-o">🔍 SEARCH</button>
+    </div>
+  </div>
+
+  <div class="guild-layout">
+    
+    <div class="g-col-left">
+      
+      <div class="g-panel g-my-guild">
+        <div class="g-panel-head">▶ YOUR FACTION</div>
+        <div class="mg-header">
+          <div class="mg-icon">⚡</div>
+          <div class="mg-info">
+            <div class="mg-name">THE_RUNTIME_TERRORS</div>
+            <div class="mg-tags">
+              <span class="ptag pt-y">LVL 42</span>
+              <span class="ptag pt-b">MEMBERS: 128/150</span>
+              <span class="ptag" style="color:var(--green);border-color:var(--green);">RANK: #4</span>
+            </div>
+          </div>
+        </div>
+        <div class="mg-stats">
+          <div class="mg-stat-box">
+            <div class="ms-lbl">GLOBAL ELO</div>
+            <div class="ms-val" style="color:var(--yellow);">45,210</div>
+          </div>
+          <div class="mg-stat-box">
+            <div class="ms-lbl">WAR RECORD</div>
+            <div class="ms-val" style="color:var(--green);">142W - 12L</div>
+          </div>
+          <div class="mg-stat-box">
+            <div class="ms-lbl">SPECIALTY</div>
+            <div class="ms-val" style="color:var(--blue);">GRAPHS</div>
+          </div>
+        </div>
+        <div class="mg-xp-bar">
+          <div class="xp-lbl">GUILD XP TO LVL 43</div>
+          <div class="xp-out"><div class="xp-in" style="width:78%;"></div></div>
+        </div>
+      </div>
+
+      <div class="g-panel g-wars">
+        <div class="g-panel-head" style="color:var(--pink);border-bottom-color:rgba(255,60,172,.3);">⚔ GUILD WARS & HOSTING</div>
+        <div class="gw-list">
+          <div class="gw-item active-war">
+            <div class="gw-badge blink">🔴 LIVE WAR</div>
+            <div class="gw-matchup">
+              <span class="gw-t1">RUNTIME_TERRORS</span> <span class="gw-vs">VS</span> <span class="gw-t2">SEGFAULT_KINGS</span>
+            </div>
+            <div class="gw-meta">BO5 • DYNAMIC PROGRAMMING • ROUND 3</div>
+            <button class="px-btn px-btn-r" style="width:100%;justify-content:center;margin-top:10px;">SPECTATE BATTLE ▶</button>
+          </div>
+          <div class="gw-item">
+            <div class="gw-badge" style="color:var(--blue);border-color:var(--blue);">🛡️ INTERNAL TRAINING</div>
+            <div class="gw-matchup" style="color:var(--white);font-size:16px;">Host an unranked 1v1 for guild members only.</div>
+            <div class="gw-meta">Custom parameters, any algorithm.</div>
+            <button class="px-btn px-btn-b" style="width:100%;justify-content:center;margin-top:10px;">HOST LOBBY</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g-col-right">
+      <div class="g-panel g-directory">
+        <div class="g-panel-head" style="color:var(--yellow);border-bottom-color:rgba(255,214,10,.3);">🏆 GLOBAL GUILD RANKINGS</div>
+        
+        <div class="dir-filters">
+          <button class="px-btn px-btn-o active">TOP RATED</button>
+          <button class="px-btn px-btn-o">MOST ACTIVE</button>
+          <button class="px-btn px-btn-o">OPEN TO JOIN</button>
+        </div>
+
+        <div class="dir-list">
+          <div class="dir-row gold">
+            <div class="dr-rank" style="color:var(--yellow);">#1</div>
+            <div class="dr-icon">🤖</div>
+            <div class="dr-info">
+              <div class="dr-name">O_LOG_N_GANG</div>
+              <div class="dr-desc">We divide and conquer. Invite only.</div>
+            </div>
+            <div class="dr-stats">
+              <div class="dr-elo">58,900 ELO</div>
+              <div class="dr-mem">150/150</div>
+            </div>
+            <button class="dr-btn">FULL</button>
+          </div>
+
+          <div class="dir-row silver">
+            <div class="dr-rank" style="color:#c0c0c0;">#2</div>
+            <div class="dr-icon">💀</div>
+            <div class="dr-info">
+              <div class="dr-name">SEGFAULT_KINGS</div>
+              <div class="dr-desc">C++ enthusiasts. Pointers or die.</div>
+            </div>
+            <div class="dr-stats">
+              <div class="dr-elo">52,440 ELO</div>
+              <div class="dr-mem">142/150</div>
+            </div>
+            <button class="dr-btn join">REQ</button>
+          </div>
+
+          <div class="dir-row bronze">
+            <div class="dr-rank" style="color:#cd7f32;">#3</div>
+            <div class="dr-icon">🔥</div>
+            <div class="dr-info">
+              <div class="dr-name">BRUTE_FORCERS</div>
+              <div class="dr-desc">If it works, it works. O(n!) is fine.</div>
+            </div>
+            <div class="dr-stats">
+              <div class="dr-elo">48,100 ELO</div>
+              <div class="dr-mem">110/150</div>
+            </div>
+            <button class="dr-btn join">JOIN</button>
+          </div>
+
+          <div class="dir-row">
+            <div class="dr-rank" style="color:var(--muted);">#4</div>
+            <div class="dr-icon">⚡</div>
+            <div class="dr-info">
+              <div class="dr-name" style="color:var(--green);">THE_RUNTIME_TERRORS</div>
+              <div class="dr-desc">Your Faction.</div>
+            </div>
+            <div class="dr-stats">
+              <div class="dr-elo">45,210 ELO</div>
+              <div class="dr-mem">128/150</div>
+            </div>
+            <button class="dr-btn own">YOU</button>
+          </div>
+
+          <div class="dir-row">
+            <div class="dr-rank" style="color:var(--muted);">#5</div>
+            <div class="dr-icon">🌳</div>
+            <div class="dr-info">
+              <div class="dr-name">TREE_HUGGERS</div>
+              <div class="dr-desc">Binary Trees, AVL, Red-Black only.</div>
+            </div>
+            <div class="dr-stats">
+              <div class="dr-elo">41,800 ELO</div>
+              <div class="dr-mem">45/100</div>
+            </div>
+            <button class="dr-btn join">JOIN</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="authModal" class="auth-modal-overlay hidden">
+  <div class="auth-modal">
+    <button class="close-btn" id="closeAuth">X</button>
+    <h2 style="color:var(--green);margin-bottom:16px;font-family:'Press Start 2P',monospace;font-size:12px;">▶ TERMINAL ACCESS</h2>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin">LOGIN</button>
+      <button class="auth-tab" id="tabRegister">SIGNUP</button>
+    </div>
+    <div class="auth-form">
+      <input type="text" id="authUsername" class="auth-input" placeholder="USERNAME" autocomplete="off" />
+      <input type="password" id="authPassword" class="auth-input" placeholder="PASSWORD" />
+      <button class="px-btn px-btn-g" id="authSubmit" style="width:100%;justify-content:center;margin-top:10px;">INITIALIZE ▶</button>
+    </div>
+  </div>
+</div>
+<script src="../js/base.js"></script>
+<script src="js/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+/* ============================================================
+   GUILD.CSS — Guilds & Communities Hub Styles
+   ============================================================ */
+
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 84px 48px 60px; }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 32px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.page-header-left h1 { font-family: 'Press Start 2P', monospace; font-size: clamp(14px,2vw,22px); margin-bottom: 6px; margin-top: 8px; }
+.page-header-left p  { font-size: 20px; color: var(--muted); max-width: 600px; line-height: 1.5; }
+.page-header-right   { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* ── LAYOUT ── */
+.guild-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; }
+@media (max-width: 900px) { .guild-layout { grid-template-columns: 1fr; } }
+.g-col-left { display: flex; flex-direction: column; gap: 24px; }
+.g-col-right { display: flex; flex-direction: column; }
+
+/* ── GENERIC PANEL ── */
+.g-panel {
+  background: var(--card); border: 3px solid;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.g-panel-head {
+  padding: 12px 16px; border-bottom: 2px solid var(--border);
+  font-family: 'Press Start 2P', monospace; font-size: 10px;
+}
+
+/* ── MY GUILD PANEL ── */
+.g-my-guild { border-color: var(--purple); box-shadow: 5px 5px 0 var(--pud); }
+.g-my-guild .g-panel-head { color: var(--purple); border-bottom-color: rgba(162,89,255,.3); }
+
+.mg-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.mg-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 3px solid rgba(162,89,255,.5); background: rgba(162,89,255,.1); clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px)); }
+.mg-name { font-family: 'Press Start 2P', monospace; font-size: 14px; color: var(--white); margin-bottom: 10px; text-shadow: 2px 2px 0 rgba(0,0,0,.5); }
+.mg-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.mg-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px 24px; }
+.mg-stat-box { background: rgba(0,0,0,.4); border: 2px solid var(--border); padding: 12px; text-align: center; clip-path: polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px)); }
+.ms-lbl { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; }
+.ms-val { font-family: 'Press Start 2P', monospace; font-size: 11px; }
+
+.mg-xp-bar { padding: 0 24px 24px; }
+.xp-lbl { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); margin-bottom: 6px; text-align: right; }
+.xp-out { height: 12px; background: rgba(255,255,255,.05); border: 2px solid var(--border); overflow: hidden; }
+.xp-in { height: 100%; background: var(--purple); box-shadow: inset -3px 0 0 rgba(0,0,0,.3); }
+
+/* ── GUILD WARS PANEL ── */
+.g-wars { border-color: var(--pink); box-shadow: 5px 5px 0 var(--pd); }
+.gw-list { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+.gw-item { background: rgba(0,0,0,.4); border: 2px solid var(--border); padding: 16px; clip-path: polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px)); }
+.gw-item.active-war { border-color: rgba(255,60,172,.4); background: rgba(255,60,172,.05); }
+
+.gw-badge { display: inline-block; font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 4px 8px; border: 2px solid var(--pink); color: var(--pink); background: rgba(255,60,172,.1); margin-bottom: 12px; }
+.gw-badge.blink { animation: blink 1s step-end infinite; }
+.gw-matchup { font-family: 'Press Start 2P', monospace; font-size: 10px; text-align: center; margin-bottom: 8px; }
+.gw-t1 { color: var(--green); } .gw-t2 { color: var(--blue); } .gw-vs { color: var(--muted); font-size: 8px; margin: 0 8px; }
+.gw-meta { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); text-align: center; }
+
+/* ── DIRECTORY PANEL ── */
+.g-directory { border-color: var(--yellow); box-shadow: 5px 5px 0 var(--yd); display: flex; flex-direction: column; height: 100%; }
+.dir-filters { display: flex; gap: 8px; padding: 16px; border-bottom: 2px solid var(--border); background: rgba(255,255,255,.02); flex-wrap: wrap; }
+.dir-filters button.active { background: rgba(255,255,255,.15); color: var(--white); }
+
+.dir-list { display: flex; flex-direction: column; gap: 8px; padding: 16px; flex: 1; }
+.dir-row { 
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  background: rgba(0,0,0,.4); border: 2px solid var(--border);
+  transition: transform .1s, border-color .1s;
+  clip-path: polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px));
+}
+.dir-row:hover { transform: translateX(-4px); border-color: rgba(255,255,255,.3); }
+.dir-row.gold { border-color: rgba(255,214,10,.3); }
+.dir-row.silver { border-color: rgba(192,192,192,.3); }
+.dir-row.bronze { border-color: rgba(205,127,50,.3); }
+
+.dr-rank { font-family: 'Press Start 2P', monospace; font-size: 10px; width: 28px; text-align: center; }
+.dr-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 2px solid var(--border); background: rgba(255,255,255,.05); clip-path: polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px)); }
+
+.dr-info { flex: 1; }
+.dr-name { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--white); margin-bottom: 6px; }
+.dr-desc { font-size: 15px; color: var(--muted); }
+
+.dr-stats { text-align: right; padding-right: 12px; }
+.dr-elo { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--yellow); margin-bottom: 6px; }
+.dr-mem { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); }
+
+.dr-btn { 
+  background: rgba(255,255,255,.05); border: 2px solid var(--border); color: var(--muted); 
+  font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 6px 10px; cursor: none;
+  clip-path: polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px));
+}
+.dr-btn.join { background: rgba(61,255,154,.1); border-color: var(--green); color: var(--green); }
+.dr-btn.join:hover { background: var(--green); color: #000; }
+.dr-btn.own { background: rgba(60,172,255,.1); border-color: var(--blue); color: var(--blue); }
