@@ -7,13 +7,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/base.css"/>
 <link rel="stylesheet" href="css/home.css"/>
+
+<style>
+  #nav-3d-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+    background: #06050f;
+    transition: opacity 1s ease-in-out;
+  }
+  #nav-3d-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ice-label {
+    position: absolute;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    color: var(--night);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border: 3px solid var(--blue);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-shadow: none;
+    z-index: 10001;
+  }
+  .ice-label.visible {
+    opacity: 1;
+  }
+</style>
 </head>
 <body>
+
+<div id="nav-3d-container">
+  <div id="label-battle" class="ice-label">⚔ BATTLE</div>
+  <div id="label-learn" class="ice-label">📖 LEARN</div>
+  <div id="label-ranks" class="ice-label">🏆 RANKS</div>
+  <div id="label-home" class="ice-label">▶ ENTER SITE</div>
+</div>
+
 <canvas id="bgC"></canvas>
 <div class="cur" id="cur">🗡️</div>
 <div class="cur-r" id="curR"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">▶ VisualDSA</div>
   <ul class="nav-links">
@@ -29,7 +71,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="pixel-grid"></div>
   <div class="debris" style="left:7%;top:22%;animation-delay:0s;">⭐</div>
@@ -65,7 +106,6 @@
     <div class="pt">Join <strong>12,000+ students</strong> who stopped guessing and started visualizing</div>
   </div>
 
-  <!-- LIVE VIZ CARD -->
   <div class="viz-card">
     <div class="viz-bar">
       <div class="mdot md-r"></div><div class="mdot md-y"></div><div class="mdot md-g"></div>
@@ -87,7 +127,6 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="t-track">
     <div class="ti">🎮 <span class="ac2">ALGO_MASTER</span> solved Two Pointers in 0.8s <span class="ts">❖</span></div>
@@ -105,7 +144,6 @@
   </div>
 </div>
 
-<!-- FEATURES -->
 <section class="sec"><div class="sw">
   <div class="reveal">
     <div class="chip chip-g">✦ FEATURES</div>
@@ -156,7 +194,6 @@
   </div>
 </div></section>
 
-<!-- LEADERBOARD -->
 <section class="sec"><div class="sw" style="padding-top:40px;">
   <div class="reveal">
     <div class="chip chip-y">🏆 LEADERBOARD</div>
@@ -192,7 +229,6 @@
   </div>
 </div></section>
 
-<!-- CTA -->
 <div class="cta-wrap reveal si">
   <div class="cta-box">
     <span class="cta-em">🚀</span>
@@ -218,7 +254,13 @@
   <div class="fc2">© 2025 VISUALDSA · MADE WITH 8BIT LOVE</div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <script src="js/base.js"></script>
 <script src="js/home.js"></script>
+
+<script src="js/nav3d.js"></script>
+
 </body>
 </html>
