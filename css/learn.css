@@ -1,0 +1,201 @@
+/* ============================================================
+   LEARN.CSS — Learning page styles
+   ============================================================ */
+
+.learn-wrap { max-width: 1240px; margin: 0 auto; padding: 84px 48px 60px; }
+
+/* ── PAGE HEADER ── */
+.learn-header { margin-bottom: 28px; }
+.learn-header h1 { font-family: 'Press Start 2P', monospace; font-size: clamp(14px,2vw,22px); color: var(--blue); text-shadow: 3px 3px 0 var(--bd); margin-bottom: 8px; margin-top: 8px; }
+.learn-header p  { font-size: 20px; color: var(--muted); max-width: 600px; line-height: 1.5; }
+
+/* ── ALGO SELECTOR ── */
+.algo-sel { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+.asel-btn {
+  font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 8px 14px;
+  cursor: none; border: 3px solid var(--border);
+  background: rgba(255,255,255,.05); color: var(--muted);
+  transition: .08s;
+  clip-path: polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px));
+}
+.asel-btn:hover { color: var(--white); border-color: rgba(255,255,255,.25); }
+.asel-btn.active {
+  background: var(--blue); color: #000; border-color: var(--blue);
+  box-shadow: inset -3px -3px 0 var(--bd), inset 3px 3px 0 rgba(255,255,255,.2), 3px 3px 0 var(--bd);
+}
+
+/* ── MAIN GRID ── */
+.learn-layout { display: grid; grid-template-columns: 1fr 380px; gap: 16px; }
+
+/* ── CONCEPT OVERVIEW (new) ── */
+.concept-overview {
+  background: var(--card); border: 3px solid rgba(60,172,255,.35);
+  padding: 20px 24px; margin-bottom: 16px;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.co-head { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--blue); margin-bottom: 14px; }
+.co-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.co-section { }
+.co-label { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; }
+.co-text  { font-size: 18px; color: var(--white); line-height: 1.5; }
+.co-text .highlight { color: var(--blue); font-family: 'Press Start 2P', monospace; font-size: 8px; }
+.co-tags  { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.co-tag   { font-family: 'Press Start 2P', monospace; font-size: 7px; padding: 2px 8px; border: 2px solid; }
+
+/* ── CODE DISPLAY ── */
+.code-display {
+  background: var(--card); border: 3px solid var(--blue);
+  box-shadow: 5px 5px 0 var(--bd);
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+  margin-bottom: 16px;
+}
+.cd-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 2px solid var(--border); }
+.cd-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--blue); }
+.cd-meta  { display: flex; gap: 8px; align-items: center; }
+.cd-lang  { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); padding: 3px 10px; border: 2px solid var(--border); }
+.cd-target{ font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--green); }
+
+.code-lines { padding: 14px 16px; }
+.cl { display: flex; align-items: flex-start; gap: 10px; padding: 3px 6px; border: 2px solid transparent; transition: all .15s steps(3); }
+.cl.hl { background: rgba(255,214,10,.09); border-color: var(--yellow); box-shadow: inset 3px 0 0 var(--yellow); }
+.cl-num  { color: rgba(255,255,255,.2); width: 24px; flex-shrink: 0; text-align: right; font-family: 'Press Start 2P', monospace; font-size: 8px; padding-top: 4px; }
+.cl-code { font-family: 'VT323', monospace; font-size: 18px; line-height: 1.7; color: var(--white); flex: 1; }
+.cl-code .kw  { color: var(--purple); }
+.cl-code .fn2 { color: var(--blue); }
+.cl-code .nm  { color: var(--green); }
+.cl-code .cm  { color: rgba(255,255,255,.3); }
+
+/* ── PLAY CONTROLS ── */
+.play-bar {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+  border-top: 2px solid var(--border); flex-wrap: wrap;
+  background: rgba(255,255,255,.02);
+}
+.pb-ctrl { display: flex; gap: 6px; }
+.pb-info { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
+.progress-bar { height: 10px; background: rgba(255,255,255,.08); border: 2px solid var(--border); overflow: hidden; cursor: none; }
+.pb-fill { height: 100%; background: var(--blue); transition: width .3s steps(8); }
+.step-counter { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); }
+.speed-sel {
+  font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted);
+  background: rgba(255,255,255,.05); border: 2px solid var(--border);
+  padding: 5px 8px; cursor: none;
+}
+.pb-hint { font-family: 'Press Start 2P', monospace; font-size: 7px; color: rgba(255,255,255,.2); }
+
+/* ── ARRAY VIZ ── */
+.arr-viz-panel {
+  background: var(--card); border: 3px solid rgba(60,172,255,.25); padding: 16px;
+  margin-bottom: 16px;
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.avp-head { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--blue); margin-bottom: 12px; }
+#learnArrViz { display: flex; gap: 4px; align-items: flex-end; justify-content: center; min-height: 72px; flex-wrap: wrap; }
+/* reuse .ac .ab .aidx .atag .tl .th .tm .fd .mi .lo .hi from home.css (already in base context) */
+
+/* ── IMPROVEMENT BLOCK (new) ── */
+.improvement-block {
+  background: rgba(0,0,0,.4); border: 3px solid rgba(255,214,10,.3); padding: 16px 20px;
+  margin-bottom: 16px;
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.ib-head { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--yellow); margin-bottom: 10px; }
+.ib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ib-item { border: 2px solid var(--border); padding: 10px 12px; }
+.ib-label { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); margin-bottom: 5px; letter-spacing: 1px; }
+.ib-text  { font-size: 16px; color: var(--white); line-height: 1.5; }
+.ib-bad   { border-color: rgba(255,60,172,.25); }
+.ib-good  { border-color: rgba(61,255,154,.25); }
+.ib-bad  .ib-label { color: var(--pink); }
+.ib-good .ib-label { color: var(--green); }
+
+/* ── COMMON MISTAKES ── */
+.mistakes-panel {
+  background: var(--card); border: 3px solid rgba(255,60,172,.3); margin-bottom: 16px;
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.mkp-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--pink); }
+.mkp-body { padding: 12px 16px; display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.mk-item  { padding: 10px; border: 2px solid rgba(255,60,172,.15); font-size: 15px; color: var(--muted); line-height: 1.4; }
+.mk-item strong { display: block; font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--pink); margin-bottom: 5px; }
+
+/* ── AI ASSISTANT ── */
+.ai-panel {
+  background: var(--card); border: 3px solid var(--purple); margin-bottom: 16px;
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.aip-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--purple); display: flex; align-items: center; gap: 8px; }
+.ai-badge { background: rgba(162,89,255,.15); border: 2px solid rgba(162,89,255,.3); padding: 2px 8px; font-size: 8px; animation: blink .8s step-end infinite; font-family: 'Press Start 2P', monospace; }
+.aip-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.ai-row   { display: flex; gap: 8px; }
+.ai-input {
+  flex: 1; background: rgba(0,0,0,.5); border: 3px solid var(--border);
+  padding: 9px 14px; font-family: 'VT323', monospace; font-size: 18px;
+  color: var(--white); cursor: none; outline: none;
+  clip-path: polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px));
+}
+.ai-input:focus { border-color: var(--purple); box-shadow: 3px 3px 0 var(--pud); }
+.ai-response { padding: 12px; border: 2px solid rgba(162,89,255,.25); font-size: 17px; color: var(--white); line-height: 1.55; display: none; background: rgba(162,89,255,.05); }
+.ai-response.show { display: block; }
+.ai-response strong { color: var(--purple); font-family: 'Press Start 2P', monospace; font-size: 8px; }
+
+/* ── RIGHT PANEL ── */
+.right-panel { display: flex; flex-direction: column; gap: 12px; }
+
+/* EXPLANATION (new — split mechanical vs conceptual) */
+.expl-panel {
+  background: var(--card); border: 3px solid rgba(61,255,154,.35);
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.ep-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--green); display: flex; align-items: center; justify-content: space-between; }
+.ep-step-badge { font-size: 8px; color: var(--yellow); background: rgba(255,214,10,.1); border: 2px solid rgba(255,214,10,.3); padding: 2px 8px; }
+.ep-body { padding: 14px 16px; }
+
+.ep-section { margin-bottom: 12px; }
+.ep-section-label { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 1px; margin-bottom: 5px; }
+.ep-mech-label { color: var(--blue); }
+.ep-conc-label { color: var(--purple); }
+.ep-text { font-size: 17px; color: var(--white); line-height: 1.55; }
+.ep-hint { font-size: 15px; color: var(--muted); line-height: 1.4; margin-top: 3px; }
+.ep-divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+/* MEMORY STATE */
+.mem-panel {
+  background: var(--card); border: 3px solid rgba(162,89,255,.4);
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.mp-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--purple); }
+.mp-body { padding: 12px 14px; }
+.var-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 16px; }
+.var-row:last-child { border-bottom: none; }
+.var-name { color: var(--blue);  font-family: 'Press Start 2P', monospace; font-size: 8px; width: 60px; flex-shrink: 0; }
+.var-eq   { color: var(--muted); }
+.var-val  { color: var(--yellow); font-family: 'Press Start 2P', monospace; font-size: 10px; transition: all .2s steps(3); }
+.var-val.changed { animation: val-flash .4s step-end; }
+
+/* CALL STACK */
+.stack-panel {
+  background: var(--card); border: 3px solid rgba(255,107,53,.4);
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.sp-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--orange); }
+.sp-body { padding: 12px 14px; }
+.stack-frame { padding: 6px 10px; margin-bottom: 4px; border: 2px solid; font-size: 15px; transition: all .2s steps(3); }
+.sf-active { border-color: var(--orange); color: var(--orange); background: rgba(255,107,53,.08); }
+.sf-prev   { border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.3); }
+
+/* COMPLEXITY (new — structured section) */
+.cx-panel {
+  background: var(--card); border: 3px solid rgba(255,214,10,.3);
+  clip-path: polygon(0 5px,5px 5px,5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px));
+}
+.cxp-head { padding: 9px 14px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--yellow); }
+.cxp-body { padding: 12px 14px; }
+.cx-group { margin-bottom: 12px; }
+.cx-group-label { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; }
+.cx-rows { display: flex; flex-direction: column; gap: 5px; }
+.cx-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 8px; border: 1px solid var(--border); }
+.cx-case { font-size: 14px; color: var(--muted); }
+.cx-val  { font-family: 'Press Start 2P', monospace; font-size: 10px; }
+.cx-g { color: var(--green); } .cx-y { color: var(--yellow); } .cx-r { color: var(--pink); }
+.cx-reasoning { font-size: 15px; color: rgba(255,255,255,.4); margin-top: 6px; line-height: 1.4; }

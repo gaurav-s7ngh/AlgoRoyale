@@ -1,0 +1,213 @@
+/* ============================================================
+   BATTLE.CSS — Battle page styles
+   ============================================================ */
+
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 84px 48px 60px; }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 32px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.page-header-left h1 { font-family: 'Press Start 2P', monospace; font-size: clamp(14px,2vw,22px); color: var(--pink); text-shadow: 3px 3px 0 var(--pd); margin-bottom: 6px; margin-top: 8px; }
+.page-header-left p  { font-size: 20px; color: var(--muted); max-width: 560px; line-height: 1.5; }
+.page-header-right   { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* ── CINEMATIC INTRO ── */
+#battle-intro {
+  position: fixed; inset: 0; z-index: 800;
+  background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#battle-intro.hidden { display: none; }
+
+.bi-bg-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0px, transparent 1px, transparent 60px);
+  animation: bi-scan 3s linear infinite;
+}
+@keyframes bi-scan { from { background-position: 0 0; } to { background-position: 60px 0; } }
+
+.bi-p1, .bi-p2 {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  transition: left .7s cubic-bezier(.2,1,.4,1), right .7s cubic-bezier(.2,1,.4,1);
+}
+.bi-p1 { left: -320px; }
+.bi-p1.in { left: 6%; }
+.bi-p2 { right: -320px; }
+.bi-p2.in { right: 6%; }
+
+.bi-avatar { font-size: 72px; animation: bounce .7s step-end infinite; }
+.bi-name   { font-family: 'Press Start 2P', monospace; font-size: 11px; text-align: center; }
+.bi-sub    { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); }
+
+/* HP bars in intro */
+.bi-hp-wrap { width: 200px; }
+.bi-hp-label { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); margin-bottom: 4px; }
+.bi-hp-out { height: 14px; border: 3px solid; overflow: hidden; }
+.bi-hp-out-g { border-color: var(--green); }
+.bi-hp-out-r { border-color: var(--pink); }
+.bi-hp-in { height: 100%; width: 100%; }
+.bi-hp-in-g { background: var(--green); }
+.bi-hp-in-r { background: var(--pink); }
+
+.bi-center { position: absolute; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.bi-vs { font-family: 'Press Start 2P', monospace; font-size: clamp(32px,6vw,80px); color: var(--yellow); text-shadow: 4px 4px 0 var(--yd), 0 0 40px rgba(255,214,10,.6); animation: flicker 1.2s infinite; }
+
+.bi-cd   { font-family: 'Press Start 2P', monospace; font-size: clamp(50px,10vw,130px); position: absolute; z-index: 3; color: var(--white); text-shadow: 5px 5px 0 rgba(0,0,0,.6), 0 0 60px rgba(255,255,255,.4); animation: cd-pop .5s steps(4) both; }
+.bi-fight{ font-family: 'Press Start 2P', monospace; font-size: clamp(32px,6vw,80px); position: absolute; z-index: 3; color: var(--pink); text-shadow: 5px 5px 0 var(--pd), 0 0 60px rgba(255,60,172,.7); animation: fight-pop .6s steps(6) both; }
+
+@keyframes cd-pop    { from { transform: scale(3.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes fight-pop { from { transform: scale(4) rotate(-8deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+
+.bi-flash { position: absolute; inset: 0; background: white; animation: flash-out .35s steps(4) both; pointer-events: none; }
+@keyframes flash-out { from { opacity: 1; } to { opacity: 0; } }
+
+.bi-sparks { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.spark { position: absolute; animation: spark-fly .5s steps(8) forwards; }
+@keyframes spark-fly { from { transform: translate(0,0) scale(1); opacity: 1; } to { transform: translate(var(--sx,60px),var(--sy,-100px)) scale(0); opacity: 0; } }
+
+/* ── BATTLE HEADER BAR ── */
+.battle-hbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.bhb-player { flex: 1; }
+.bhb-name   { font-family: 'Press Start 2P', monospace; font-size: 10px; margin-bottom: 6px; }
+.bhb-name.p1 { color: var(--green); }
+.bhb-name.p2 { color: var(--pink);  text-align: right; }
+.hp-out      { height: 18px; border: 3px solid; overflow: hidden; }
+.hp-out-g    { border-color: var(--green); }
+.hp-out-r    { border-color: var(--pink); }
+.hp-in       { height: 100%; transition: width .5s steps(10); }
+.hp-g        { background: var(--green); box-shadow: inset -3px 0 0 rgba(0,0,0,.3); }
+.hp-r        { background: var(--pink);  box-shadow: inset -3px 0 0 rgba(0,0,0,.3); }
+.bhb-meta    { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); margin-top: 4px; }
+
+.battle-center-hud { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
+.b-timer  { font-family: 'Press Start 2P', monospace; font-size: 22px; color: var(--white); background: rgba(0,0,0,.5); padding: 8px 16px; border: 3px solid var(--border); }
+.b-timer span { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); }
+.b-round  { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); }
+.b-status { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--green); animation: blink .6s step-end infinite; }
+
+/* ── PROBLEM PANEL ── */
+.prob-panel {
+  background: var(--card); border: 3px solid rgba(255,214,10,.35);
+  padding: 20px 24px; margin-bottom: 20px;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.prob-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.prob-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--yellow); }
+.prob-tags  { display: flex; gap: 6px; flex-wrap: wrap; }
+.ptag { font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 2px 10px; border: 2px solid; }
+.pt-g { color: var(--green);  border-color: var(--green);  background: rgba(61,255,154,.07); }
+.pt-y { color: var(--yellow); border-color: var(--yellow); background: rgba(255,214,10,.07); }
+.pt-b { color: var(--blue);   border-color: var(--blue);   background: rgba(60,172,255,.07); }
+.prob-body { font-size: 20px; color: var(--white); line-height: 1.5; margin-bottom: 10px; }
+.prob-io   { background: rgba(0,0,0,.4); padding: 10px 14px; border: 2px solid var(--border); font-size: 17px; color: var(--muted); line-height: 1.6; }
+.prob-io strong { color: var(--white); font-family: 'Press Start 2P', monospace; font-size: 8px; }
+
+/* ── CODE PANELS ── */
+.battle-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.bp {
+  background: var(--card); border: 3px solid;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.bp-1 { border-color: var(--green); box-shadow: 4px 4px 0 var(--gd); }
+.bp-2 { border-color: var(--pink);  box-shadow: 4px 4px 0 var(--pd); }
+.bp-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 2px solid var(--border); }
+.bp-title { font-family: 'Press Start 2P', monospace; font-size: 9px; }
+.bp-1 .bp-title { color: var(--green); }
+.bp-2 .bp-title { color: var(--pink); }
+.bp-status { font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 2px 8px; border: 2px solid; }
+.st-running { color: var(--yellow); border-color: var(--yellow); animation: blink .4s step-end infinite; }
+.st-done    { color: var(--green);  border-color: var(--green); }
+.st-err     { color: var(--pink);   border-color: var(--pink); }
+.code-area { padding: 14px; font-family: 'VT323', monospace; font-size: 17px; line-height: 1.8; min-height: 220px; }
+.code-area pre { white-space: pre-wrap; font-size: 17px; line-height: 1.8; font-family: 'VT323', monospace; }
+.kw  { color: var(--purple); }
+.fn2 { color: var(--blue); }
+.nm  { color: var(--green); }
+.cm  { color: rgba(255,255,255,.3); }
+
+/* ── WINNER SUMMARY (new) ── */
+.winner-summary {
+  background: var(--card); border: 3px solid var(--green);
+  box-shadow: 6px 6px 0 var(--gd);
+  padding: 0; margin-bottom: 20px; overflow: hidden;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+  display: none;
+}
+.winner-summary.show { display: block; }
+.ws-banner {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px,2.5vw,26px);
+  text-align: center; padding: 22px 20px; letter-spacing: 2px;
+  border-bottom: 3px solid var(--border);
+  animation: flicker 2s infinite;
+}
+.ws-banner.p1-wins { color: var(--green); text-shadow: 3px 3px 0 var(--gd), 0 0 30px rgba(61,255,154,.5); background: rgba(61,255,154,.05); }
+.ws-banner.p2-wins { color: var(--pink);  text-shadow: 3px 3px 0 var(--pd), 0 0 30px rgba(255,60,172,.5);  background: rgba(255,60,172,.05); }
+.ws-banner.draw    { color: var(--yellow);text-shadow: 3px 3px 0 var(--yd), 0 0 30px rgba(255,214,10,.5);  background: rgba(255,214,10,.05); }
+
+.ws-headline { padding: 20px 24px 0; font-size: 22px; color: var(--white); line-height: 1.5; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
+.ws-headline strong { color: var(--yellow); font-family: 'Press Start 2P', monospace; font-size: 9px; }
+
+/* ── COMPARISON MATRIX (new) ── */
+.comparison-matrix { padding: 20px 24px; border-bottom: 2px solid var(--border); }
+.cm-title { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); margin-bottom: 14px; letter-spacing: 1px; }
+.cm-table { width: 100%; border-collapse: collapse; font-size: 17px; }
+.cm-table th { font-family: 'Press Start 2P', monospace; font-size: 8px; padding: 8px 12px; border: 2px solid var(--border); color: var(--muted); background: rgba(255,255,255,.03); text-align: left; }
+.cm-table th:nth-child(2) { color: var(--green); border-color: rgba(61,255,154,.3); }
+.cm-table th:nth-child(3) { color: var(--pink);  border-color: rgba(255,60,172,.3); }
+.cm-table td { padding: 8px 12px; border: 2px solid var(--border); }
+.cm-table tr:hover td { background: rgba(255,255,255,.03); }
+.cm-table td:first-child { color: var(--muted); font-size: 15px; }
+.val-win  { color: var(--green); font-family: 'Press Start 2P', monospace; font-size: 9px; }
+.val-lose { color: var(--pink);  font-family: 'Press Start 2P', monospace; font-size: 9px; }
+.val-tie  { color: var(--yellow);font-family: 'Press Start 2P', monospace; font-size: 9px; }
+
+/* Efficiency bars */
+.eff-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.eff-bar { flex: 1; height: 8px; background: rgba(255,255,255,.08); border: 2px solid var(--border); overflow: hidden; }
+.eff-fill { height: 100%; transition: width .6s steps(10); }
+.ef-g { background: var(--green); }
+.ef-r { background: var(--pink); }
+
+/* ── CRITICAL LINE IMPACT (new) ── */
+.critical-lines { padding: 20px 24px; border-bottom: 2px solid var(--border); }
+.cl-title { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); margin-bottom: 14px; }
+.cl-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cl-item  { border: 2px solid; padding: 12px 14px; }
+.cl-item-g { border-color: rgba(61,255,154,.3); background: rgba(61,255,154,.04); }
+.cl-item-r { border-color: rgba(255,60,172,.3);  background: rgba(255,60,172,.04); }
+.cl-line-num { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); margin-bottom: 6px; }
+.cl-code-snip { font-size: 16px; line-height: 1.6; background: rgba(0,0,0,.3); padding: 6px 10px; margin-bottom: 8px; border: 1px solid var(--border); }
+.cl-impact { font-size: 16px; line-height: 1.5; }
+.cl-impact-g { color: var(--green); }
+.cl-impact-r { color: var(--pink); }
+
+/* ── EXECUTION TRACE ── */
+.trace-panel {
+  background: var(--card); border: 3px solid var(--border); margin-bottom: 20px;
+  clip-path: polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+}
+.trace-head { padding: 10px 16px; border-bottom: 2px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.trace-live { color: var(--yellow); font-size: 10px; animation: blink .5s step-end infinite; }
+.trace-body { padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.trace-col h4 { font-family: 'Press Start 2P', monospace; font-size: 9px; margin-bottom: 10px; }
+.tc-g h4 { color: var(--green); }
+.tc-r h4 { color: var(--pink); }
+.trace-step { display: flex; align-items: flex-start; gap: 8px; padding: 6px 8px; margin-bottom: 4px; border: 2px solid transparent; font-size: 16px; }
+.trace-step.active { border-color: var(--yellow); background: rgba(255,214,10,.06); }
+.trace-step.done   { border-color: rgba(61,255,154,.2); background: rgba(61,255,154,.04); }
+.ts-num { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); width: 24px; flex-shrink: 0; padding-top: 2px; }
+.ts-txt { color: var(--white); line-height: 1.4; }
+.ts-var { color: var(--yellow); font-family: 'Press Start 2P', monospace; font-size: 8px; margin-top: 2px; }
+
+/* ── PERFORMANCE ANALYSIS ── */
+.perf-analysis { padding: 20px 24px; }
+.pa-title { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); margin-bottom: 12px; }
+.pa-text  { font-size: 19px; color: var(--white); line-height: 1.6; }
+.pa-text .highlight-g { color: var(--green); font-family: 'Press Start 2P', monospace; font-size: 9px; }
+.pa-text .highlight-r { color: var(--pink);  font-family: 'Press Start 2P', monospace; font-size: 9px; }
+.pa-text .highlight-y { color: var(--yellow);font-family: 'Press Start 2P', monospace; font-size: 9px; }
+
+/* ── RESULT ACTION ROW ── */
+.result-actions { display: flex; gap: 10px; padding: 16px 24px; border-top: 2px solid var(--border); flex-wrap: wrap; }

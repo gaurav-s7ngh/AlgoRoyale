@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>📖 Learn — VisualDSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/base.css"/>
+<link rel="stylesheet" href="../css/learn.css"/>
+<!-- shared array cell styles from home -->
+<style>
+.ac{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ab{width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P',monospace;font-size:11px;background:rgba(255,255,255,.04);border:3px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);transition:all .3s steps(4);}
+.ab.lo{border-color:var(--blue);color:var(--blue);background:rgba(60,172,255,.1);box-shadow:3px 3px 0 rgba(60,172,255,.3);}
+.ab.hi{border-color:var(--pink);color:var(--pink);background:rgba(255,60,172,.1);box-shadow:3px 3px 0 rgba(255,60,172,.3);}
+.ab.mi{border-color:var(--yellow);color:var(--yellow);background:rgba(255,214,10,.1);box-shadow:3px 3px 0 rgba(255,214,10,.4);transform:translateY(-10px);animation:ab-bounce .4s step-end infinite;}
+.ab.fd{border-color:var(--green);color:var(--green);background:rgba(61,255,154,.12);box-shadow:3px 3px 0 rgba(61,255,154,.5);animation:ab-found .5s step-end infinite;}
+.ab.cur{border-color:var(--orange);color:var(--orange);background:rgba(255,107,53,.1);box-shadow:3px 3px 0 rgba(255,107,53,.4);}
+.aidx{font-size:10px;color:rgba(255,255,255,.2);}
+.atag{font-size:10px;font-family:'Press Start 2P',monospace;height:13px;}
+.tl{color:var(--blue);}.th{color:var(--pink);}.tm{color:var(--yellow);}
+@keyframes ab-bounce{0%,100%{transform:translateY(-10px);}50%{transform:translateY(-14px);}}
+@keyframes ab-found{0%,100%{background:rgba(61,255,154,.12);}50%{background:rgba(61,255,154,.28);}}
+</style>
+</head>
+<body>
+<canvas id="bgC"></canvas>
+<div class="cur" id="cur">📖</div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="../index.html">▶ VisualDSA</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">[HOME]</a></li>
+    <li><a href="battle.html" class="battle-link">[⚔ BATTLE]</a></li>
+    <li><a href="learn.html" class="active learn-link">[📖 LEARN]</a></li>
+    <li><a href="#" class="rank-link">[RANKS]</a></li>
+    <li><a href="#" class="guild-link">[GUILD]</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="px-btn px-btn-o">LOGIN</button>
+    <a href="battle.html" class="px-btn px-btn-b">⚔ GO BATTLE</a>
+  </div>
+</nav>
+
+<div class="learn-wrap">
+
+  <!-- PAGE HEADER -->
+  <div class="learn-header">
+    <div class="chip chip-b">📖 LEARNING MODE</div>
+    <h1>STEP-BY-STEP ALGORITHM VISUALIZER</h1>
+    <p>Watch every variable change, every stack frame push, every comparison — live. Pause anytime. Ask the AI anything.</p>
+  </div>
+
+  <!-- ALGO SELECTOR -->
+  <div class="algo-sel" id="algoSel">
+    <button class="asel-btn active" data-algo="binary_search">BINARY SEARCH</button>
+    <button class="asel-btn" data-algo="bubble_sort">BUBBLE SORT</button>
+    <button class="asel-btn" data-algo="factorial">FACTORIAL (RECURSION)</button>
+    <button class="asel-btn" data-algo="linear_search">LINEAR SEARCH</button>
+  </div>
+
+  <!-- ══ CONCEPT OVERVIEW (new) ══ -->
+  <div class="concept-overview" id="conceptOverview">
+    <div class="co-head">💡 CONCEPT OVERVIEW</div>
+    <div class="co-grid" id="coGrid"></div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="learn-layout">
+
+    <!-- LEFT: CODE + CONTROLS + VIZ + IMPROVEMENTS -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <!-- CODE DISPLAY -->
+      <div class="code-display">
+        <div class="cd-head">
+          <div class="cd-title" id="learnTitle">▶ BINARY SEARCH</div>
+          <div class="cd-meta">
+            <span class="cd-lang">Python</span>
+            <span class="cd-target" id="cdTarget">TARGET: 23</span>
+          </div>
+        </div>
+        <div class="code-lines" id="codeLines"></div>
+        <!-- PLAY CONTROLS -->
+        <div class="play-bar">
+          <div class="pb-ctrl">
+            <button class="px-btn px-btn-o" style="padding:6px 12px;font-size:8px;" id="prevBtn" onclick="learnStep(-1)">⏮ PREV</button>
+            <button class="px-btn px-btn-b" style="padding:6px 12px;font-size:8px;" id="playBtn" onclick="learnToggle()">▶ PLAY</button>
+            <button class="px-btn px-btn-o" style="padding:6px 12px;font-size:8px;" id="nextBtn" onclick="learnStep(1)">NEXT ⏭</button>
+          </div>
+          <div class="pb-info">
+            <div class="progress-bar"><div class="pb-fill" id="pbFill" style="width:0%;"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="step-counter" id="stepCounter">0 / 0</div>
+              <div class="pb-hint">← USE PREV/NEXT TO STEP THROUGH. PAUSE ANYTIME.</div>
+            </div>
+          </div>
+          <select class="speed-sel" id="speedSel">
+            <option value="1400">0.5x</option>
+            <option value="900" selected>1x</option>
+            <option value="450">2x</option>
+            <option value="220">4x</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ARRAY VISUALIZATION -->
+      <div class="arr-viz-panel">
+        <div class="avp-head">▶ ARRAY VISUALIZATION</div>
+        <div id="learnArrViz"></div>
+      </div>
+
+      <!-- IMPROVEMENT BLOCK (new) -->
+      <div class="improvement-block" id="improvementBlock">
+        <div class="ib-head">🚀 IMPROVEMENT OPPORTUNITIES</div>
+        <div class="ib-grid" id="ibGrid"></div>
+      </div>
+
+      <!-- COMMON MISTAKES -->
+      <div class="mistakes-panel">
+        <div class="mkp-head">⚠ COMMON MISTAKES — DON'T DO THESE</div>
+        <div class="mkp-body" id="mistakesBody"></div>
+      </div>
+
+      <!-- AI ASSISTANT -->
+      <div class="ai-panel">
+        <div class="aip-head">🤖 AI DOUBT ASSISTANT <span class="ai-badge">ONLINE</span></div>
+        <div class="aip-body">
+          <div class="ai-row">
+            <input class="ai-input" id="aiInput" placeholder="Ask about any line or concept... e.g. why mid = (low+high)//2?" />
+            <button class="px-btn px-btn-p" onclick="askAI()">ASK ▶</button>
+          </div>
+          <div class="ai-response" id="aiResponse"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: EXPLANATION + MEMORY + STACK + COMPLEXITY -->
+    <div class="right-panel">
+
+      <!-- STEP EXPLANATION (new — split mechanical + conceptual) -->
+      <div class="expl-panel">
+        <div class="ep-head">
+          💬 STEP EXPLANATION
+          <span class="ep-step-badge" id="epBadge">STEP 0</span>
+        </div>
+        <div class="ep-body">
+          <div class="ep-section">
+            <div class="ep-section-label ep-mech-label">⚙ WHAT HAPPENED (MECHANICAL)</div>
+            <div class="ep-text" id="epMech">Press PLAY or NEXT to begin. Each step will be explained here.</div>
+          </div>
+          <div class="ep-divider"></div>
+          <div class="ep-section">
+            <div class="ep-section-label ep-conc-label">🧠 WHY IT MATTERS (CONCEPTUAL)</div>
+            <div class="ep-text ep-hint" id="epConc">The conceptual reason behind each step will appear here.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEMORY STATE -->
+      <div class="mem-panel">
+        <div class="mp-head">🧠 MEMORY STATE</div>
+        <div class="mp-body" id="memBody">
+          <div style="font-size:16px;color:var(--muted);padding:4px;">No variables yet — press PLAY</div>
+        </div>
+      </div>
+
+      <!-- CALL STACK -->
+      <div class="stack-panel">
+        <div class="sp-head">📚 CALL STACK</div>
+        <div class="sp-body" id="stackBody">
+          <div class="stack-frame sf-prev" style="opacity:.35;">[ empty ]</div>
+        </div>
+      </div>
+
+      <!-- COMPLEXITY (new — structured) -->
+      <div class="cx-panel">
+        <div class="cxp-head">⚡ COMPLEXITY BREAKDOWN</div>
+        <div class="cxp-body" id="cxBody"></div>
+      </div>
+
+    </div>
+  </div><!-- /learn-layout -->
+</div><!-- /learn-wrap -->
+
+<script src="../js/base.js"></script>
+<script src="../js/learn.js"></script>
+</body>
+</html>

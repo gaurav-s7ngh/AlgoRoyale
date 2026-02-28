@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>⚔ Battle Arena — VisualDSA</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/base.css"/>
+<link rel="stylesheet" href="../css/battle.css"/>
+</head>
+<body>
+<canvas id="bgC"></canvas>
+<div class="cur" id="cur">⚔️</div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="../index.html">▶ VisualDSA</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">[HOME]</a></li>
+    <li><a href="battle.html" class="active battle-link">[⚔ BATTLE]</a></li>
+    <li><a href="learn.html" class="learn-link">[📖 LEARN]</a></li>
+    <li><a href="#" class="rank-link">[RANKS]</a></li>
+    <li><a href="#" class="guild-link">[GUILD]</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="px-btn px-btn-o">LOGIN</button>
+    <a href="battle.html" class="px-btn px-btn-r">⚔ FIND MATCH</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     CINEMATIC INTRO OVERLAY
+═══════════════════════════════════════════ -->
+<div id="battle-intro">
+  <div class="bi-bg-lines"></div>
+  <div class="bi-sparks" id="biSparks"></div>
+
+  <!-- Player 1 -->
+  <div class="bi-p1" id="bip1">
+    <div class="bi-avatar">🤖</div>
+    <div class="bi-name" style="color:var(--green);">ALGO_MASTER</div>
+    <div class="bi-sub">ELO 2847 · Python</div>
+    <div class="bi-hp-wrap">
+      <div class="bi-hp-label">HP</div>
+      <div class="bi-hp-out bi-hp-out-g"><div class="bi-hp-in bi-hp-in-g" style="width:100%;"></div></div>
+    </div>
+  </div>
+
+  <!-- Center countdown -->
+  <div class="bi-center" id="biCenter">
+    <div class="bi-vs">VS</div>
+  </div>
+
+  <!-- Player 2 -->
+  <div class="bi-p2" id="bip2">
+    <div class="bi-avatar">💀</div>
+    <div class="bi-name" style="color:var(--pink);">CODEZ_GOD</div>
+    <div class="bi-sub">ELO 2203 · Python</div>
+    <div class="bi-hp-wrap">
+      <div class="bi-hp-label">HP</div>
+      <div class="bi-hp-out bi-hp-out-r"><div class="bi-hp-in bi-hp-in-r" style="width:100%;"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BATTLE ARENA
+═══════════════════════════════════════════ -->
+<div class="page-wrap">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="chip chip-r">⚔ BATTLE MODE</div>
+      <h1>1V1 CODING ARENA</h1>
+      <p>Two players. Same problem. Same time. Your algorithm either wins or goes home. Ranked. Auto-judged. No excuses.</p>
+    </div>
+    <div class="page-header-right">
+      <button class="px-btn px-btn-y" onclick="replayBattle()">⚔ REMATCH</button>
+      <button class="px-btn px-btn-o">🔀 NEW PROBLEM</button>
+      <a href="learn.html" class="px-btn px-btn-b">📖 LEARN THIS ALGO</a>
+    </div>
+  </div>
+
+  <!-- HP BARS + TIMER -->
+  <div class="battle-hbar">
+    <div class="bhb-player">
+      <div class="bhb-name p1">🤖 ALGO_MASTER</div>
+      <div class="hp-out hp-out-g"><div class="hp-in hp-g" id="hp1" style="width:100%;"></div></div>
+      <div class="bhb-meta">ELO: 2,847 · Python · Binary Search specialist</div>
+    </div>
+    <div class="battle-center-hud">
+      <div class="b-timer">⏱ <span id="bTimer">10:00</span></div>
+      <div class="b-round">ROUND 1 OF 3</div>
+      <div class="b-status" id="bStatus">FIGHT!</div>
+    </div>
+    <div class="bhb-player" style="text-align:right;">
+      <div class="bhb-name p2">CODEZ_GOD 💀</div>
+      <div class="hp-out hp-out-r"><div class="hp-in hp-r" id="hp2" style="width:100%;"></div></div>
+      <div class="bhb-meta" style="text-align:right;">ELO: 2,203 · Python · Array specialist</div>
+    </div>
+  </div>
+
+  <!-- PROBLEM PANEL -->
+  <div class="prob-panel">
+    <div class="prob-top">
+      <div class="prob-title">⚔ PROBLEM #047 — BINARY SEARCH</div>
+      <div class="prob-tags">
+        <span class="ptag pt-g">ARRAY</span>
+        <span class="ptag pt-y">MEDIUM</span>
+        <span class="ptag pt-b">10 MIN</span>
+        <span class="ptag" style="color:var(--purple);border-color:var(--purple);background:rgba(162,89,255,.07);">O(LOG N) REQUIRED</span>
+      </div>
+    </div>
+    <div class="prob-body">Given a sorted array of integers and a target value, implement Binary Search to find and return the index of the target. Return -1 if the target does not exist in the array. <strong style="color:var(--yellow);font-family:'Press Start 2P',monospace;font-size:9px;">Must achieve O(log n) time complexity.</strong></div>
+    <div class="prob-io">
+      <strong>INPUT:</strong> arr = [2, 5, 8, 12, 16, 23, 38, 45], target = 23<br/>
+      <strong>OUTPUT:</strong> 5 &nbsp;|&nbsp; <strong>EXPECTED COMPLEXITY:</strong> O(log n) time, O(1) space
+    </div>
+  </div>
+
+  <!-- CODE PANELS -->
+  <div class="battle-panels">
+    <div class="bp bp-1">
+      <div class="bp-head">
+        <div class="bp-title">🤖 ALGO_MASTER — PLAYER 1</div>
+        <div class="bp-status st-done">✓ ACCEPTED</div>
+      </div>
+      <div class="code-area"><pre><span class="kw">def</span> <span class="fn2">binary_search</span>(arr, target):
+  low, high = <span class="nm">0</span>, len(arr) - <span class="nm">1</span>
+  <span class="kw">while</span> low &lt;= high:
+    mid = (low + high) // <span class="nm">2</span>
+    <span class="kw">if</span> arr[mid] == target:
+      <span class="kw">return</span> mid
+    <span class="kw">elif</span> arr[mid] &lt; target:
+      low = mid + <span class="nm">1</span>
+    <span class="kw">else</span>:
+      high = mid - <span class="nm">1</span>
+  <span class="kw">return</span> -<span class="nm">1</span></pre></div>
+    </div>
+    <div class="bp bp-2">
+      <div class="bp-head">
+        <div class="bp-title">💀 CODEZ_GOD — PLAYER 2</div>
+        <div class="bp-status st-done">✓ ACCEPTED</div>
+      </div>
+      <div class="code-area"><pre><span class="kw">def</span> <span class="fn2">find_target</span>(arr, target):
+  <span class="kw">for</span> i <span class="kw">in</span> range(len(arr)):
+    <span class="kw">if</span> arr[i] == target:
+      <span class="kw">return</span> i
+  <span class="kw">return</span> -<span class="nm">1</span>
+
+<span class="cm"># Linear scan approach</span>
+<span class="cm"># Correct, but not O(log n)</span></pre></div>
+    </div>
+  </div>
+
+  <!-- ═══ WINNER SUMMARY (new) ═══ -->
+  <div class="winner-summary show" id="winnerSummary">
+    <div class="ws-banner p1-wins">🏆 PLAYER 1 WINS — ALGO_MASTER 🏆</div>
+
+    <div class="ws-headline">
+      <strong>⚡ WHY P1 WINS:</strong> Both players returned the correct answer (index 5).
+      However, Player 1 used <strong style="color:var(--green);font-family:'Press Start 2P',monospace;font-size:9px;">Binary Search O(log n)</strong> — eliminating half the array per step —
+      while Player 2 used <strong style="color:var(--pink);font-family:'Press Start 2P',monospace;font-size:9px;">Linear Search O(n)</strong> — scanning every element.
+      On an array of 1,000,000 elements, P1 needs ~20 steps. P2 needs up to 1,000,000. That's the difference.
+    </div>
+
+    <!-- ═══ COMPARISON MATRIX (new) ═══ -->
+    <div class="comparison-matrix">
+      <div class="cm-title">▶ COMPARISON MATRIX</div>
+      <table class="cm-table">
+        <thead>
+          <tr>
+            <th>METRIC</th>
+            <th>🤖 ALGO_MASTER (P1)</th>
+            <th>💀 CODEZ_GOD (P2)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Correctness</td>
+            <td><span class="val-win">✓ PASS</span></td>
+            <td><span class="val-win">✓ PASS</span></td>
+          </tr>
+          <tr>
+            <td>Time Complexity</td>
+            <td><span class="val-win">O(log n)</span></td>
+            <td><span class="val-lose">O(n)</span></td>
+          </tr>
+          <tr>
+            <td>Space Complexity</td>
+            <td><span class="val-win">O(1)</span></td>
+            <td><span class="val-win">O(1)</span></td>
+          </tr>
+          <tr>
+            <td>Comparisons Made</td>
+            <td><span class="val-win">3 steps</span></td>
+            <td><span class="val-lose">6 steps</span></td>
+          </tr>
+          <tr>
+            <td>Algorithm Strategy</td>
+            <td><span class="val-win">Divide & Conquer</span></td>
+            <td><span class="val-lose">Brute Force Scan</span></td>
+          </tr>
+          <tr>
+            <td>Scalability (n=1M)</td>
+            <td><span class="val-win">~20 operations</span></td>
+            <td><span class="val-lose">~1,000,000 ops</span></td>
+          </tr>
+          <tr>
+            <td>Efficiency Score</td>
+            <td>
+              <div class="eff-bar-wrap">
+                <div class="eff-bar"><div class="eff-fill ef-g" style="width:98%;"></div></div>
+                <span class="val-win">98/100</span>
+              </div>
+            </td>
+            <td>
+              <div class="eff-bar-wrap">
+                <div class="eff-bar"><div class="eff-fill ef-r" style="width:52%;"></div></div>
+                <span class="val-lose">52/100</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ CRITICAL LINE IMPACT (new) ═══ -->
+    <div class="critical-lines">
+      <div class="cl-title">🎯 CRITICAL LINE IMPACT — WHAT DECIDED THE BATTLE</div>
+      <div class="cl-grid">
+        <div class="cl-item cl-item-g">
+          <div class="cl-line-num">🤖 P1 · LINE 3–4 (THE WINNING MOVE)</div>
+          <div class="cl-code-snip"><span class="kw">while</span> low &lt;= high:<br/>&nbsp;&nbsp;mid = (low + high) // <span class="nm">2</span></div>
+          <div class="cl-impact cl-impact-g">✓ Halves the search space every iteration. After just 3 comparisons on an 8-element array, the answer is found. This single decision — comparing to mid and discarding half — is what makes Binary Search O(log n).</div>
+        </div>
+        <div class="cl-item cl-item-r">
+          <div class="cl-line-num">💀 P2 · LINE 2 (THE LOSING MOVE)</div>
+          <div class="cl-code-snip"><span class="kw">for</span> i <span class="kw">in</span> range(len(arr)):</div>
+          <div class="cl-impact cl-impact-r">✗ Iterates through every element sequentially. No halving, no shortcuts. Even though the array is sorted, P2 ignores that property entirely. This guarantees O(n) regardless of where the target is.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXECUTION TRACE -->
+    <div class="trace-panel" style="margin:0;border:none;clip-path:none;">
+      <div class="trace-head">📊 LIVE EXECUTION TRACE <span class="trace-live">● COMPLETE</span></div>
+      <div class="trace-body">
+        <div class="trace-col tc-g">
+          <h4>🤖 P1 — BINARY SEARCH</h4>
+          <div class="trace-step done"><span class="ts-num">1</span><div><div class="ts-txt">Initialize: low=0, high=7</div><div class="ts-var">low=0, high=7, searching [2..45]</div></div></div>
+          <div class="trace-step done"><span class="ts-num">2</span><div><div class="ts-txt">mid=3, arr[3]=12. 12 &lt; 23 → discard left half</div><div class="ts-var">low=4, eliminated indices 0-3</div></div></div>
+          <div class="trace-step done"><span class="ts-num">3</span><div><div class="ts-txt">mid=5, arr[5]=23. 23 == 23 ✓ FOUND!</div><div class="ts-var">Return 5. Total: 2 comparisons</div></div></div>
+        </div>
+        <div class="trace-col tc-r">
+          <h4>💀 P2 — LINEAR SEARCH</h4>
+          <div class="trace-step done"><span class="ts-num">1</span><div><div class="ts-txt">i=0, arr[0]=2. 2≠23 → next</div><div class="ts-var">No match, continue</div></div></div>
+          <div class="trace-step done"><span class="ts-num">2</span><div><div class="ts-txt">i=1,2,3,4 → all miss. 5,8,12,16 ≠ 23</div><div class="ts-var">4 wasted comparisons</div></div></div>
+          <div class="trace-step done"><span class="ts-num">3</span><div><div class="ts-txt">i=5, arr[5]=23. ✓ Found — finally.</div><div class="ts-var">Return 5. Total: 6 comparisons</div></div></div>
+        </div>
+      </div>
+
+      <!-- PERFORMANCE ANALYSIS -->
+      <div class="perf-analysis">
+        <div class="pa-title">⚡ PERFORMANCE ANALYSIS</div>
+        <div class="pa-text">
+          Both solutions are <span class="highlight-g">correct</span>. The winner is determined by
+          <span class="highlight-y">time complexity</span>. P1's Binary Search achieves
+          <span class="highlight-g">O(log n)</span> by leveraging the sorted property —
+          each comparison eliminates half the remaining candidates.
+          P2's Linear Search is <span class="highlight-r">O(n)</span>: correct but ignores
+          the sorted property entirely. For <span class="highlight-y">n = 1,000,000</span>:
+          P1 needs ≈ 20 steps. P2 could need 1,000,000.
+          That exponential gap in scalability is the decisive factor.
+          <span class="highlight-g">P1 WINS by Time Complexity advantage.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button class="px-btn px-btn-r" onclick="replayBattle()">⚔ REMATCH</button>
+      <button class="px-btn px-btn-y">🔀 NEW PROBLEM</button>
+      <a href="learn.html" class="px-btn px-btn-b">📖 LEARN BINARY SEARCH</a>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script src="../js/base.js"></script>
+<script src="../js/battle.js"></script>
+</body>
+</html>

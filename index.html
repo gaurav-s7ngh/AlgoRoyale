@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VisualDSA — Built Different</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/home.css"/>
+</head>
+<body>
+<canvas id="bgC"></canvas>
+<div class="cur" id="cur">🗡️</div>
+<div class="cur-r" id="curR"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">▶ VisualDSA</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">[HOME]</a></li>
+    <li><a href="pages/battle.html" class="battle-link">[⚔ BATTLE]</a></li>
+    <li><a href="pages/learn.html" class="learn-link">[📖 LEARN]</a></li>
+    <li><a href="#" class="rank-link">[RANKS]</a></li>
+    <li><a href="#" class="guild-link">[GUILD]</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="px-btn px-btn-o">LOGIN</button>
+    <a href="pages/battle.html" class="px-btn px-btn-g">START FREE ▶</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pixel-grid"></div>
+  <div class="debris" style="left:7%;top:22%;animation-delay:0s;">⭐</div>
+  <div class="debris" style="left:88%;top:35%;animation-delay:1s;">✦</div>
+  <div class="debris" style="left:14%;top:65%;animation-delay:2s;">◆</div>
+  <div class="debris" style="left:82%;top:70%;animation-delay:.5s;">★</div>
+  <div class="debris" style="left:93%;top:18%;animation-delay:1.5s;font-size:10px;">■</div>
+  <div class="debris" style="left:3%;top:50%;animation-delay:3s;font-size:10px;">●</div>
+
+  <div class="hero-badge"><span class="bdot"></span> ★ 12,000+ DEVS IN THE ARENA ★</div>
+
+  <h1 class="hero-h1">
+    <span class="h1-w">ALGORITHMS HIT </span><span class="h1-g">DIFFERENT</span><br/>
+    <span class="h1-p">WHEN U CAN SEE THEM</span>
+  </h1>
+
+  <p class="hero-sub">
+    Watch DSA <strong>come alive step-by-step</strong>, battle real opponents,<br/>
+    and actually understand what your code is doing. No guessing.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="pages/battle.html" class="px-btn px-btn-r">⚔ ENTER ARENA</a>
+    <a href="pages/learn.html"  class="px-btn px-btn-b">📖 LEARN MODE</a>
+    <button class="px-btn px-btn-o">▶ SEE LIVE</button>
+  </div>
+
+  <div class="social-proof">
+    <div class="avs">
+      <div class="av av-a">😎</div><div class="av av-b">🤖</div>
+      <div class="av av-c">💀</div><div class="av av-d">🔥</div><div class="av av-e">⚡</div>
+    </div>
+    <div class="pt">Join <strong>12,000+ students</strong> who stopped guessing and started visualizing</div>
+  </div>
+
+  <!-- LIVE VIZ CARD -->
+  <div class="viz-card">
+    <div class="viz-bar">
+      <div class="mdot md-r"></div><div class="mdot md-y"></div><div class="mdot md-g"></div>
+      <div class="vfn">binary_search.py — VisualDSA</div>
+      <div class="v-live"><div class="ldot"></div> LIVE</div>
+    </div>
+    <div class="viz-body">
+      <div class="algo-lbl">▶ BINARY SEARCH — STEP BY STEP</div>
+      <div class="arr-row" id="homeArr"></div>
+    </div>
+    <div class="viz-foot">
+      <div class="step-i" id="homeStep">STEP 1/4 — <span>INIT</span></div>
+      <div class="viz-ctrl">
+        <button class="vc vc-p" id="homePlay">▶ RUN</button>
+        <button class="vc vc-s" id="homePause">⏸</button>
+        <button class="vc vc-s" id="homeReset">↺</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-track">
+    <div class="ti">🎮 <span class="ac2">ALGO_MASTER</span> solved Two Pointers in 0.8s <span class="ts">❖</span></div>
+    <div class="ti">⚔ <span class="ac2">NULL_POINTER</span> defeated DEBUG_KING in 1v1 <span class="ts">❖</span></div>
+    <div class="ti">🔊 Binary Tree Traversal now has audio narration <span class="ts">❖</span></div>
+    <div class="ti">🏆 <span class="ac2">PIXEL_SORT</span> hit Level 50 — Grandmaster! <span class="ts">❖</span></div>
+    <div class="ti">✨ Container With Most Water visualization live <span class="ts">❖</span></div>
+    <div class="ti">📈 <span class="ac2">CODEZ_GOD</span> climbed 12 spots on leaderboard <span class="ts">❖</span></div>
+    <div class="ti">🎮 <span class="ac2">ALGO_MASTER</span> solved Two Pointers in 0.8s <span class="ts">❖</span></div>
+    <div class="ti">⚔ <span class="ac2">NULL_POINTER</span> defeated DEBUG_KING in 1v1 <span class="ts">❖</span></div>
+    <div class="ti">🔊 Binary Tree Traversal now has audio narration <span class="ts">❖</span></div>
+    <div class="ti">🏆 <span class="ac2">PIXEL_SORT</span> hit Level 50 — Grandmaster! <span class="ts">❖</span></div>
+    <div class="ti">✨ Container With Most Water visualization live <span class="ts">❖</span></div>
+    <div class="ti">📈 <span class="ac2">CODEZ_GOD</span> climbed 12 spots on leaderboard <span class="ts">❖</span></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="sec"><div class="sw">
+  <div class="reveal">
+    <div class="chip chip-g">✦ FEATURES</div>
+    <div class="sttl" style="margin-top:10px;">EVERYTHING U NEED<br/>TO ACTUALLY GET IT</div>
+    <div class="ssub">Not another grind. Visual, competitive, addictive.</div>
+  </div>
+  <div class="fg">
+    <div class="fc fc-g reveal" style="position:relative;transition-delay:.05s">
+      <span class="ctag tag-n">NEW</span>
+      <div class="fi fi-g">🎬</div><div class="ct">VISUAL ENGINE</div>
+      <div class="cd">Every pointer, comparison, and recursion call plays out frame by frame. With audio.</div>
+    </div>
+    <div class="fc fc-r reveal" style="position:relative;transition-delay:.1s">
+      <span class="ctag tag-h">🔥 HOT</span>
+      <div class="fi fi-r">⚔️</div><div class="ct">1v1 ARENA</div>
+      <div class="cd">Battle real opponents. Ranked. Timed. Auto-judged. Climb or go home. No cap.</div>
+    </div>
+    <div class="fc fc-p reveal" style="position:relative;transition-delay:.15s">
+      <div class="fi fi-p">🤖</div><div class="ct">AI DOUBT BOT</div>
+      <div class="cd">Paste code, ask anything. Explains logic, finds bugs, suggests better solutions 24/7.</div>
+    </div>
+    <div class="fw reveal" style="transition-delay:.2s">
+      <div class="fw-text">
+        <div class="chip chip-p">🌳 BINARY TREE</div>
+        <div class="ct" style="font-size:14px;margin-top:10px;">SEE THE RECURSION STACK LIVE</div>
+        <div class="cd" style="font-size:18px;max-width:360px;margin-top:6px;">Watch inorder traversal node by node. Recursion stack builds in real time so you finally understand what the call stack actually does.</div>
+        <a href="pages/learn.html" class="px-btn px-btn-b" style="margin-top:14px;display:inline-flex;">📖 TRY LEARN MODE</a>
+      </div>
+      <div class="fw-demo">
+        <div class="mv">
+          <div class="mvl">▶ INORDER TRAVERSAL</div>
+          <div class="tr" id="homeTree">
+            <div class="trow"><div class="tn" id="ht-1">8</div></div>
+            <div class="trow"><div class="tn" id="ht-2">3</div><div class="tn" id="ht-3">10</div></div>
+            <div class="trow"><div class="tn" id="ht-4">1</div><div class="tn" id="ht-5">6</div><div class="tn" id="ht-6">14</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fc fc-b reveal" style="transition-delay:.05s">
+      <div class="fi fi-b">🔊</div><div class="ct">AUDIO ENGINE</div>
+      <div class="cd">Every step spoken aloud. Toggle on/off, 0.8x–1.5x speed, live captions.</div>
+    </div>
+    <div class="fc fc-y reveal" style="transition-delay:.1s">
+      <div class="fi fi-y">📊</div><div class="ct">STATS BOARD</div>
+      <div class="cd">Track accuracy, solve time, weak topics. Radar charts. Know where to grind.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LEADERBOARD -->
+<section class="sec"><div class="sw" style="padding-top:40px;">
+  <div class="reveal">
+    <div class="chip chip-y">🏆 LEADERBOARD</div>
+    <div class="sttl" style="margin-top:10px;">WHO'S RUNNING<br/>THE ARENA RN</div>
+  </div>
+  <div class="lb">
+    <div class="lr gold reveal" style="transition-delay:.05s">
+      <div class="lrk rg">#1</div><div class="lav">🤖</div>
+      <div class="li"><div class="ln">ALGO_MASTER</div><div class="la">Specialty: Binary Search · Tree Traversal</div></div>
+      <div class="lbd">
+        <span class="lbg" style="color:var(--yellow);border-color:rgba(255,214,10,.4);background:rgba(255,214,10,.08);">👑 GRANDMASTER</span>
+        <span class="lbg" style="color:var(--green);border-color:rgba(61,255,154,.3);">🔥 47 STREAK</span>
+      </div>
+      <div class="lsc">9,842</div><div class="lwl">47W/3L</div>
+    </div>
+    <div class="lr silver reveal" style="transition-delay:.1s">
+      <div class="lrk rs">#2</div><div class="lav">💀</div>
+      <div class="li"><div class="ln">NULL_POINTER</div><div class="la">Specialty: Two Pointers · Sliding Window</div></div>
+      <div class="lbd"><span class="lbg" style="color:var(--blue);border-color:rgba(60,172,255,.3);">💎 DIAMOND</span></div>
+      <div class="lsc">8,211</div><div class="lwl">41W/6L</div>
+    </div>
+    <div class="lr bronze reveal" style="transition-delay:.15s">
+      <div class="lrk rb">#3</div><div class="lav">🔥</div>
+      <div class="li"><div class="ln">STACK_OVERFLOW</div><div class="la">Specialty: Tree Traversal · Recursion</div></div>
+      <div class="lbd"><span class="lbg" style="color:var(--purple);border-color:rgba(162,89,255,.3);">🌟 MASTER</span></div>
+      <div class="lsc">7,890</div><div class="lwl">38W/9L</div>
+    </div>
+    <div class="lr reveal" style="transition-delay:.2s">
+      <div class="lrk ro">#4</div><div class="lav">⚡</div>
+      <div class="li"><div class="ln">PIXEL_SORT</div><div class="la">Specialty: Sorting · Search</div></div>
+      <div class="lbd"></div><div class="lsc">7,445</div><div class="lwl">36W/11L</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<div class="cta-wrap reveal si">
+  <div class="cta-box">
+    <span class="cta-em">🚀</span>
+    <div class="oi"><span class="oi-dot"></span> 284 PLAYERS ONLINE</div>
+    <div class="cta-t">STOP READING ABOUT<br/><span style="color:var(--green);text-shadow:2px 2px 0 var(--gd);">ALGORITHMS.</span><br/><span style="color:var(--blue);text-shadow:2px 2px 0 var(--bd);">WATCH THEM.</span></div>
+    <div class="cta-s">Free to start. No credit card. Just you, the algorithms, and the arena.</div>
+    <div class="cta-bs">
+      <a href="pages/battle.html" class="px-btn px-btn-r">⚔ ENTER BATTLE</a>
+      <a href="pages/learn.html"  class="px-btn px-btn-b">📖 LEARN MODE</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">▶ VISUALDSA</div>
+  <div class="fli">
+    <a href="pages/learn.html">LEARN</a>
+    <a href="pages/battle.html">ARENA</a>
+    <a href="#">RANKS</a>
+    <a href="#">GITHUB</a>
+    <a href="#">PRIVACY</a>
+  </div>
+  <div class="fc2">© 2025 VISUALDSA · MADE WITH 8BIT LOVE</div>
+</footer>
+
+<script src="js/base.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
