@@ -116,13 +116,12 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (nav) nav.style.background = window.scrollY > 50 ? 'rgba(6,5,15,.98)' : 'rgba(6,5,15,.94)';
 });
-
 /* ── FOOLPROOF AUTHENTICATION SYSTEM & PROFILE ROUTING ── */
-document.addEventListener('DOMContentLoaded', () => {
+(function initAuthSystem() {
   
+  // 1. Function to visually update the navbar buttons
   function updateNavState() {
     const currentUser = localStorage.getItem('vdsa_user');
-    // We target both the generic button and the specific a-tag in the profile
     const navLoginBtns = document.querySelectorAll('.nav-cta .px-btn-o, #navAuthBtn');
     
     navLoginBtns.forEach(btn => {
@@ -130,85 +129,94 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.textContent = `[ ${currentUser} ]`;
         btn.style.color = 'var(--green)';
         btn.style.borderColor = 'var(--green)';
-        // When logged in, click to go to profile
-        btn.onclick = (e) => {
-          e.preventDefault();
-          const isInPagesFolder = window.location.pathname.includes('/pages/');
-          window.location.href = isInPagesFolder ? 'profile.html' : 'pages/profile.html';
-        };
       } else {
         btn.textContent = 'LOGIN / SIGNUP';
         btn.style.color = ''; 
         btn.style.borderColor = ''; 
-        // When logged out, click to open modal
-        btn.onclick = (e) => {
-          e.preventDefault();
-          const modal = document.getElementById('authModal');
-          if (modal) {
-            modal.classList.remove('hidden');
-          } else {
-            alert("Oops! The Auth Modal HTML is missing from this file.");
-          }
-        };
       }
     });
   }
 
-  // ── MODAL INTERACTIONS (Using Event Delegation) ──
-  // This guarantees clicks are registered even if the HTML loads late
+  // Run once immediately to set the correct state on page load
+  updateNavState();
+
+  // 2. Global Event Delegation (Captures ALL clicks perfectly)
   document.body.addEventListener('click', (e) => {
     
-    // 1. Close Button
+    // -> Clicked the Login/Profile Button in Navbar
+    const navBtn = e.target.closest('.nav-cta .px-btn-o') || e.target.closest('#navAuthBtn');
+    if (navBtn) {
+      e.preventDefault();
+      const currentUser = localStorage.getItem('vdsa_user');
+      if (currentUser) {
+        // Logged in: Go to profile
+        const isInPagesFolder = window.location.pathname.includes('/pages/');
+        window.location.href = isInPagesFolder ? 'profile.html' : 'pages/profile.html';
+      } else {
+        // Logged out: Open modal
+        const modal = document.getElementById('authModal');
+        if (modal) {
+          modal.classList.remove('hidden');
+        } else {
+          alert("Oops! The Auth Modal HTML is missing from this file.");
+        }
+      }
+      return; // Stop further processing
+    }
+
+    // -> Clicked the Modal Close Button 'X'
     if (e.target.closest('#closeAuth')) {
       const modal = document.getElementById('authModal');
       if(modal) modal.classList.add('hidden');
     }
     
-    // 2. Submit Button (Initialize)
+    // -> Clicked 'INITIALIZE / REGISTER' Submit Button
     if (e.target.closest('#authSubmit')) {
       const authUsername = document.getElementById('authUsername');
       const userVal = authUsername ? authUsername.value.trim().toUpperCase() : '';
       if (userVal) {
-        localStorage.setItem('vdsa_user', userVal);
+        localStorage.setItem('vdsa_user', userVal); // Save user session
         const modal = document.getElementById('authModal');
-        if(modal) modal.classList.add('hidden');
-        updateNavState();
+        if(modal) modal.classList.add('hidden'); // Close modal
+        updateNavState(); // Update the UI
+        for(let i=0; i<5; i++) document.body.click(); // Trigger spark effect
       }
     }
 
-    // 3. Tab Switching
+    // -> Clicked Modal Tabs (Login vs Signup)
     if (e.target.closest('#tabRegister')) {
       e.target.closest('#tabRegister').classList.add('active');
-      document.getElementById('tabLogin').classList.remove('active');
-      document.getElementById('authSubmit').innerHTML = 'REGISTER ▶';
+      const loginTab = document.getElementById('tabLogin');
+      if(loginTab) loginTab.classList.remove('active');
+      const submitBtn = document.getElementById('authSubmit');
+      if(submitBtn) submitBtn.innerHTML = 'REGISTER ▶';
     }
     if (e.target.closest('#tabLogin')) {
       e.target.closest('#tabLogin').classList.add('active');
-      document.getElementById('tabRegister').classList.remove('active');
-      document.getElementById('authSubmit').innerHTML = 'INITIALIZE ▶';
+      const regTab = document.getElementById('tabRegister');
+      if(regTab) regTab.classList.remove('active');
+      const submitBtn = document.getElementById('authSubmit');
+      if(submitBtn) submitBtn.innerHTML = 'INITIALIZE ▶';
     }
 
-    // 4. Logout Button (On Profile Page)
+    // -> Clicked Logout Button on Profile Page
     if (e.target.closest('#logoutBtn')) {
-      localStorage.removeItem('vdsa_user');
+      localStorage.removeItem('vdsa_user'); // Clear session
       const isInPagesFolder = window.location.pathname.includes('/pages/');
-      window.location.href = isInPagesFolder ? '../index.html' : 'index.html';
+      window.location.href = isInPagesFolder ? '../index.html' : 'index.html'; // Kick to home
     }
   });
 
-  // ── PROFILE PAGE POPULATION ──
+  // 3. Profile Page specific routing logic
   const profileNameEl = document.getElementById('profileName');
   if (profileNameEl) {
     const currentUser = localStorage.getItem('vdsa_user');
     if (currentUser) {
-      profileNameEl.textContent = currentUser;
+      profileNameEl.textContent = currentUser; // Populate name
     } else {
-      // Boot them to the homepage if they access the profile while logged out
+      // If they try to access the profile page while logged out, kick them out
       const isInPagesFolder = window.location.pathname.includes('/pages/');
       window.location.href = isInPagesFolder ? '../index.html' : 'index.html';
     }
   }
-
-  // Run once on page load to set correct button state
-  updateNavState();
-});
+})();

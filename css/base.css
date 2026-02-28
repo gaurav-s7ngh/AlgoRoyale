@@ -219,3 +219,47 @@ footer {
 @keyframes px-pulse { 0%,100%{box-shadow:3px 3px 0 rgba(162,89,255,.4);} 50%{box-shadow:5px 5px 0 rgba(162,89,255,.7);} }
 @keyframes found-pulse { 0%,100%{background:rgba(61,255,154,.12);} 50%{background:rgba(61,255,154,.28);} }
 @keyframes val-flash { 0%,100%{color:var(--green);} 50%{color:var(--yellow);} }
+
+/* ── AUTH MODAL OVERLAY ── */
+.auth-modal-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 1; transition: opacity 0.2s;
+}
+.auth-modal-overlay.hidden {
+  opacity: 0; pointer-events: none;
+}
+.auth-modal {
+  background: var(--card); border: 4px solid var(--green);
+  box-shadow: 8px 8px 0 var(--gd), 0 0 30px rgba(61,255,154,.2);
+  padding: 30px; width: 100%; max-width: 400px; position: relative;
+  clip-path: polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px));
+  transform: translateY(0); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.auth-modal-overlay.hidden .auth-modal { transform: translateY(20px); }
+
+.close-btn {
+  position: absolute; top: 12px; right: 16px;
+  background: none; border: none; color: var(--muted);
+  font-family: 'Press Start 2P', monospace; font-size: 12px;
+  cursor: none; transition: 0.1s;
+}
+.close-btn:hover { color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+
+.auth-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+.auth-tab {
+  background: none; border: none; color: var(--muted);
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  cursor: none; padding: 6px 12px; transition: 0.1s;
+}
+.auth-tab.active { color: var(--green); background: rgba(61,255,154,.1); border: 2px solid var(--green); }
+
+.auth-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-input {
+  background: rgba(0,0,0,.6); border: 3px solid var(--border);
+  padding: 12px 14px; font-family: 'VT323', monospace; font-size: 20px; color: var(--white);
+  outline: none; cursor: none;
+  clip-path: polygon(0 4px,4px 4px,4px 0,calc(100% - 4px) 0,calc(100% - 4px) 4px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,4px calc(100% - 4px),0 calc(100% - 4px));
+}
+.auth-input:focus { border-color: var(--green); box-shadow: 3px 3px 0 var(--gd); }
